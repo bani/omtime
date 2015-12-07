@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">OmTime</string>
+
+    <string name="dummy_button">Start</string>
+    <string name="dummy_content">Om\nTime</string>
+</resources>
