@@ -1,14 +1,20 @@
 package com.baniverso.omtime;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -19,9 +25,11 @@ import java.util.concurrent.TimeUnit;
  * status bar and navigation/system bar) with user interaction.
  */
 public class Timer extends ActionBarActivity {
-    private static final int DURATION = 900000;
+    private static int duration = 900000;
+    private static float volume = 0.8f;
     private static final int TIMER_INTERVAL = 1000;
     private static AudioManager am;
+    private static SharedPreferences sharedPref;
     private static int initialVolume;
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -91,10 +99,14 @@ public class Timer extends ActionBarActivity {
                 final TextView bgText = (TextView) findViewById(R.id.fullscreen_content);
                 final MediaPlayer bells1 = MediaPlayer.create(getApplicationContext(), R.raw.om1bell);
                 bells1.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                bells1.setVolume(0.8f,0.8f);
+
+
+                duration = Integer.parseInt(sharedPref.getString("duration", "900000"));
+                volume = Float.parseFloat(sharedPref.getString("volume", "0.8f"));
+                bells1.setVolume(volume,volume);
                 bells1.start();
 
-                new CountDownTimer(DURATION, TIMER_INTERVAL) {
+                new CountDownTimer(duration, TIMER_INTERVAL) {
 
                     private Boolean firstBell = Boolean.TRUE;
                     private Boolean secondBell = Boolean.TRUE;
@@ -105,11 +117,11 @@ public class Timer extends ActionBarActivity {
                                 TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
                         bgText.setText(timeRemaining);
 
-                        if(firstBell && millisUntilFinished < (DURATION / 3)) {
+                        if(firstBell && millisUntilFinished < (duration / 3)) {
                             bells1.start();
                             firstBell = Boolean.FALSE;
                         }
-                        if(secondBell && millisUntilFinished < (DURATION / 3) * 2) {
+                        if(secondBell && millisUntilFinished < (duration / 3) * 2) {
                             bells1.start();
                             secondBell = Boolean.FALSE;
                         }
@@ -120,7 +132,7 @@ public class Timer extends ActionBarActivity {
                         bgText.setText("Om\nTime");
                         MediaPlayer bells3 = MediaPlayer.create(getApplicationContext(), R.raw.om3bells);
                         bells3.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                        bells3.setVolume(0.8f, 0.8f);
+                        bells3.setVolume(volume, volume);
                         bells3.start();
                     }
                 }.start();
@@ -159,6 +171,8 @@ public class Timer extends ActionBarActivity {
 
         am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         initialVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     @Override
@@ -181,6 +195,28 @@ public class Timer extends ActionBarActivity {
     protected void onStart() {
         am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
         super.onStart();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.settings:
+                startActivity(new Intent(this, Settings.class));
+                return true;
+            case R.id.quit:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void toggle() {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="duration"
+        android:title="@string/duration"
+        android:dialogTitle="@string/duration_title"
+        android:entries="@array/duration_entries"
+        android:entryValues="@array/duration_values"
+        android:defaultValue="@string/duration_default" />
+    <ListPreference
+        android:key="volume"
+        android:title="@string/volume"
+        android:dialogTitle="@string/volume_title"
+        android:entries="@array/volume_entries"
+        android:entryValues="@array/volume_values"
+        android:defaultValue="@string/volume_default" />
+</PreferenceScreen>

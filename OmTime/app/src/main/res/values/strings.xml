@@ -3,4 +3,36 @@
 
     <string name="dummy_button">Start</string>
     <string name="dummy_content">Om\nTime</string>
+
+    <string name="settings">Settings</string>
+    <string name="quit">Quit</string>
+
+    <string name="duration">Duration</string>
+    <string name="duration_title">Duration of the meditation session</string>
+    <string name="duration_default">900000</string>
+    <string-array name="duration_entries">
+        <item>6 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>60 minutes</item>
+    </string-array>
+    <string-array name="duration_values">
+        <item>360000</item>
+        <item>900000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+    </string-array>
+    <string name="volume">Volume</string>
+    <string name="volume_title">Volume of the alarm</string>
+    <string name="volume_default">0.8</string>
+    <string-array name="volume_entries">
+        <item>Min</item>
+        <item>Med</item>
+        <item>Max</item>
+    </string-array>
+    <string-array name="volume_values">
+        <item>0.02</item>
+        <item>0.1</item>
+        <item>0.8</item>
+    </string-array>
 </resources>
