@@ -2,7 +2,7 @@
     <string name="app_name">OmTime</string>
 
     <string name="dummy_button">Start</string>
-    <string name="dummy_content">Om\nTime</string>
+    <string name="dummy_content"></string>
 
     <string name="settings">Settings</string>
     <string name="quit">Quit</string>

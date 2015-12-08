@@ -2,12 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
-    tools:context="com.baniverso.omtime.Timer">
+    android:background="#4cdcc3"
+    tools:context="com.baniverso.omtime.Timer"
+    android:id="@+id/background">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:id="@+id/bg_image"
+        android:src="@drawable/bowl"/>
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
@@ -17,8 +30,7 @@
         android:text="@string/dummy_content"
         android:textColor="#ffffff"
         android:textSize="100sp"
-        android:textStyle="bold"
-        android:background="@color/black_overlay" />
+        android:textStyle="bold" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->

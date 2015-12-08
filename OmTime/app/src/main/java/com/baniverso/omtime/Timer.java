@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.concurrent.TimeUnit;
 
@@ -129,7 +130,7 @@ public class Timer extends ActionBarActivity {
 
                     public void onFinish() {
                         findViewById(R.id.dummy_button).setVisibility(View.VISIBLE);
-                        bgText.setText("Om\nTime");
+                        bgText.setText("");
                         MediaPlayer bells3 = MediaPlayer.create(getApplicationContext(), R.raw.om3bells);
                         bells3.setAudioStreamType(AudioManager.STREAM_MUSIC);
                         bells3.setVolume(volume, volume);
@@ -154,7 +155,6 @@ public class Timer extends ActionBarActivity {
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
-
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
