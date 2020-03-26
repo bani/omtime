@@ -11,7 +11,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class Timer extends ActionBarActivity {
+public class Timer extends AppCompatActivity {
     private static int duration = 900000;
     private static float volume = 0.8f;
     private static final int TIMER_INTERVAL = 1000;
