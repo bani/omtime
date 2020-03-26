@@ -111,6 +111,7 @@ public class Timer extends AppCompatActivity {
 
                     private Boolean firstBell = Boolean.TRUE;
                     private Boolean secondBell = Boolean.TRUE;
+                    private Boolean uninterrupted = duration == 1200000;
 
                     public void onTick(long millisUntilFinished) {
                         String timeRemaining = String.format("%02d:%02d",
@@ -118,14 +119,18 @@ public class Timer extends AppCompatActivity {
                                 TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
                         bgText.setText(timeRemaining);
 
-                        if(firstBell && millisUntilFinished < (duration / 3)) {
-                            bells1.start();
-                            firstBell = Boolean.FALSE;
+                        if(!uninterrupted) {
+                            if(firstBell && millisUntilFinished < (duration / 3)) {
+                                bells1.start();
+                                firstBell = Boolean.FALSE;
+                            }
+                            if(secondBell && millisUntilFinished < (duration / 3) * 2) {
+                                bells1.start();
+                                secondBell = Boolean.FALSE;
+                            }
                         }
-                        if(secondBell && millisUntilFinished < (duration / 3) * 2) {
-                            bells1.start();
-                            secondBell = Boolean.FALSE;
-                        }
+
+
                     }
 
                     public void onFinish() {
